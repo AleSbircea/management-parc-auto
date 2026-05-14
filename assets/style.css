@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #000;
+
+    background-image: 
+       /* linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* Un strat negru transparent ca să se vadă bine scrisul */
+        url('porsche-silueta.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f5f5f5;
+    overflow: hidden;
+}
+
+/* particule peste fundal */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+.logo-area h1 {
+    font-size: 5rem;
+    text-shadow: 0 0 30px rgba(0,0,0,0.8); 
+}
+
+.logo-area p {
+    color: #eee;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 60px; 
+}
+#stars {
+    width: 4px; 
+    height: 4px; 
+    background: transparent;
+    border-radius: 50%; 
+    box-shadow: 
+        10vw 10vh #fff, 20vw 30vh #d63031, 40vw 15vh #fff, 60vw 40vh #d63031, 
+        80vw 10vh #fff, 90vw 50vh #d63031, 15vw 70vh #fff, 35vw 85vh #d63031, 
+        5vw 90vh #fff, 55vw 60vh #d63031, 75vw 90vh #fff, 25vw 20vh #d63031,
+        50vw 50vh #fff, 30vw 10vh #d63031, 70vw 30vh #fff, 85vw 80vh #d63031;
+    animation: animStar 50s linear infinite;
+}
+
+#stars2 {
+    width: 6px; 
+    height: 6px;
+    background: transparent;
+    border-radius: 50%; 
+    box-shadow: 
+        5vw 15vh #d63031, 25vw 45vh #fff, 45vw 10vh #d63031, 65vw 55vh #fff, 
+        85vw 30vh #d63031, 15vw 80vh #fff, 35vw 65vh #d63031, 55vw 95vh #fff,
+        10vw 40vh #fff, 60vw 20vh #d63031, 80vw 70vh #fff, 40vw 80vh #d63031;
+    animation: animStar 30s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes animStar {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-100vh); }
+}
+
+/* continut si logo */
+ .hero-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    height: 75vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    padding: 60px 0 80px 0; 
+}
+
+.logo-area h1 {
+    font-size: 4rem;
+    margin-bottom: 0;
+}
+
+.logo-area h1 span {
+    color: #d63031;
+}
+
+.divider {
+    height: 3px;
+    width: 60px;
+    background-color: #d63031;
+    margin: 10px auto 20px;
+}
+
+.logo-area p {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: #666;
+    margin-bottom: 0px;
+    
+}
+
+/* stil masina */
+.car-image {
+    width: 90%;
+    max-width: 550px;
+    height: auto;
+    margin: 20px auto 40px;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(214, 48, 49, 0.3));
+    animation: carFloat 4s ease-in-out infinite;
+}
+
+@keyframes carFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* butoane */
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: auto; 
+}
+
+.btn {
+    width: 180px;
+    padding: 14px 0;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-login {
+    background-color: #d63031;
+    color: #fff;
+    border: 1px solid #d63031;
+}
+
+.btn-register {
+    background-color: transparent;
+    border: 1px solid #444;
+    color: #ccc;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(214, 48, 49, 0.4);
+}
+
+/* animatie intrare */
+.fade-in { animation: fadeIn 1.5s ease-out; }
+.slide-up { animation: slideUp 1s ease-out 0.5s forwards; opacity: 0; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+
+
+
+
+
