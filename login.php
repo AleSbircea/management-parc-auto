@@ -5,7 +5,7 @@
     <title>Login - AUTO221</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="home-page">
     <div class="bg-animation">
         <div id="stars"></div>
         <div id="stars2"></div>

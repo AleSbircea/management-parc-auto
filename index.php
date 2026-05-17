@@ -9,7 +9,7 @@
     <title>AUTO221 - Management Parc Auto</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="home-page">
 
     <div class="bg-animation">
         <div id="stars"></div>

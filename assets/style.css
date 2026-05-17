@@ -7,20 +7,22 @@
 
 body {
     background-color: #000;
+    color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
 
-    background-image: 
-       /* linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* Un strat negru transparent ca să se vadă bine scrisul */
-        url('porsche-silueta.png'); 
+
+body.home-page {
+    background-image: url('porsche-silueta.png'); 
     background-size: cover; 
     background-position: center; 
     background-attachment: fixed; 
     background-repeat: no-repeat;
-    
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #f5f5f5;
     overflow: hidden;
 }
 
@@ -176,7 +178,104 @@ body {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
+/* CONTAINERUL PRINCIPAL */
+.container {
+    display: flex;
+    width: 100%; /* Folosește % în loc de vw */
+    min-height: 100vh;
+    background: #0a0a0a; 
+    position: relative;
+}
 
+/* SIDEBAR - Varianta consolidată */
+.sidebar {
+    width: 260px;
+    background-color: #888888; /* Griul mat din poză */
+    padding: 30px 20px;
+    border-radius: 0 40px 40px 0; /* Rotunjirea din design */
+    flex-shrink: 0;
+}
+
+.sidebar h2 {
+    color: #d63031;
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    background-color: #e0e0e0; /* Butoanele gri deschis */
+    color: #000;
+    text-decoration: none;
+    padding: 12px;
+    display: block;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background: #ffffff;
+    color: #d63031;
+    transform: translateX(5px);
+}
+
+/* CONȚINUTUL DIN DREAPTA */
+.content {
+    flex: 1;
+    padding: 50px;
+    color: white;
+}
+
+/* CARDURI ȘI TABELE */
+.card, .recent-activity {
+    background-color: #333333;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th {
+    color: #d63031;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    border-bottom: 1px solid #444;
+    padding: 10px;
+}
+
+table td {
+    padding: 15px 10px;
+    border-bottom: 1px solid #222;
+}
+
+/* UTILITARE CULORI */
+.pink { color: #ff4d6d; }
+.green { color: #2ecc71; }
+.yellow { color: #f1c40f; }
+
+.btn-alerte {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
 
