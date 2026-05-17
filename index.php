@@ -1,10 +1,13 @@
+<?php 
+ 
+?>
 <!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTO221 - Management Parc Auto</title>
-    <link rel="stylesheet" href="/management-parc-auto/assets/style.css">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
@@ -22,8 +25,8 @@
         </div>
         
         <div class="button-group slide-up">
-            <a href="login.html" class="btn btn-login">Intră în cont</a>
-            <a href="register.html" class="btn btn-register">Creează cont</a>
+            <a href="login.php" class="btn btn-login">Intră în cont</a>
+            <a href="register.php" class="btn btn-register">Creează cont</a>
         </div>
        <div class="marquee-container slide-up-delayed">
         
