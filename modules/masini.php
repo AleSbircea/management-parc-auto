@@ -1,8 +1,10 @@
 <?php
 session_start();
-
-
-$_SESSION['username'] = "Developer"; 
+include '../config/db.php';
+if (!isset($_SESSION['username'])) {
+    header("Location: ...php"); 
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +31,13 @@ $_SESSION['username'] = "Developer";
     </aside>
 
     <main class="content">
+        <?php if (isset($_GET['success'])): ?>
+    <div class="alert success">✅ Mașina a fost adăugată cu succes!</div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert error">❌ <?php echo htmlspecialchars($_GET['error']); ?></div>
+<?php endif; ?>
         <header class="page-header">
             <div>
                 <h1>Gestiune Flotă Auto</h1>
@@ -54,32 +63,35 @@ $_SESSION['username'] = "Developer";
                         <th>Acțiuni</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Porsche 911 Carrera</strong></td>
-                        <td><span class="plate-number">B 221 AUT</span></td>
-                        <td>WP0ZZZ99ZLS123456</td>
-                        <td>2022</td>
-                        <td><span class="badge activa">activa</span></td>
-                        <td><a href="#" class="action-link edit">Editează</a></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Audi e-tron GT</strong></td>
-                        <td><span class="plate-number">TM 88 AMP</span></td>
-                        <td>WAUZZZGEZLB654321</td>
-                        <td>2023</td>
-                        <td><span class="badge activa">activa</span></td>
-                        <td><a href="#" class="action-link edit">Editează</a></td>
-                    </tr>
-                    <tr>
-                        <td><strong>BMW M4 Competition</strong></td>
-                        <td><span class="plate-number">CJ 44 RAC</span></td>
-                        <td>WBA31AZ000K789102</td>
-                        <td>2021</td>
-                        <td><span class="badge inactiva">inactiva</span></td>
-                        <td><a href="#" class="action-link edit">Editează</a></td>
-                    </tr>
-                </tbody>
+                    <tbody>
+                        <?php
+                        $query = "SELECT * FROM masini ORDER BY id_masina DESC";
+                        $result = mysqli_query($conn, $query);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                                <tr>
+                                    <td><strong><?php echo $row['marca'] . " " . $row['model']; ?></strong></td>
+                                    <td><span class="plate-number"><?php echo $row['numar_inmatriculare']; ?></span></td>
+                                    <td><?php echo $row['vin']; ?></td>
+                                    <td><?php echo $row['an_fabricatie']; ?></td>
+                                    <td>
+                                        <span class="badge <?php echo ($row['status'] == 'activa') ? 'activa' : 'inactiva'; ?>">
+                                            <?php echo $row['status']; ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="edit_car.php?id=<?php echo $row['id_masina']; ?>" class="action-link edit">Editează</a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='6' style='text-align:center;'>Nu există mașini înregistrate în sistem.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
             </table>
         </section>
 
@@ -122,6 +134,7 @@ $_SESSION['username'] = "Developer";
                 </div>
             </form>
         </section>
+
     </main>
 </div>
 </body>
