@@ -2,7 +2,7 @@
 session_start();
 include '../config/db.php';
 if (!isset($_SESSION['username'])) {
-    header("Location: ...php"); 
+    header("Location: ../login.php"); /* Am corectat calea către login */
     exit();
 }
 ?>
@@ -32,12 +32,13 @@ if (!isset($_SESSION['username'])) {
 
     <main class="content">
         <?php if (isset($_GET['success'])): ?>
-    <div class="alert success">✅ Mașina a fost adăugată cu succes!</div>
-<?php endif; ?>
+            <div class="alert success">✅ Mașina a fost adăugată cu succes!</div>
+        <?php endif; ?>
 
-<?php if (isset($_GET['error'])): ?>
-    <div class="alert error">❌ <?php echo htmlspecialchars($_GET['error']); ?></div>
-<?php endif; ?>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert error">❌ <?php echo htmlspecialchars($_GET['error']); ?></div>
+        <?php endif; ?>
+        
         <header class="page-header">
             <div>
                 <h1>Gestiune Flotă Auto</h1>
@@ -59,39 +60,56 @@ if (!isset($_SESSION['username'])) {
                         <th>Nr. Înmatriculare</th>
                         <th>VIN / Șasiu</th>
                         <th>An Fabricație</th>
-                        <th>Status</th>
+                        <th>Km Actuali</th> <th>Anvelope</th>   <th>Status</th>
                         <th>Acțiuni</th>
                     </tr>
                 </thead>
-                    <tbody>
-                        <?php
-                        $query = "SELECT * FROM masini ORDER BY id_masina DESC";
-                        $result = mysqli_query($conn, $query);
+                <tbody>
+                    <?php
+                    $query = "SELECT * FROM masini ORDER BY id_masina DESC";
+                    $result = mysqli_query($conn, $query);
 
-                        if (mysqli_num_rows($result) > 0) {
-                            while($row = mysqli_fetch_assoc($result)) {
-                        ?>
-                                <tr>
-                                    <td><strong><?php echo $row['marca'] . " " . $row['model']; ?></strong></td>
-                                    <td><span class="plate-number"><?php echo $row['numar_inmatriculare']; ?></span></td>
-                                    <td><?php echo $row['vin']; ?></td>
-                                    <td><?php echo $row['an_fabricatie']; ?></td>
-                                    <td>
-                                        <span class="badge <?php echo ($row['status'] == 'activa') ? 'activa' : 'inactiva'; ?>">
-                                            <?php echo $row['status']; ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="edit_car.php?id=<?php echo $row['id_masina']; ?>" class="action-link edit">Editează</a>
-                                    </td>
-                                </tr>
-                                <?php
-                            }
-                        } else {
-                            echo "<tr><td colspan='6' style='text-align:center;'>Nu există mașini înregistrate în sistem.</td></tr>";
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                            <tr>
+                                <td><strong><?php echo htmlspecialchars($row['marca'] . " " . $row['model']); ?></strong></td>
+                                <td><span class="plate-number"><?php echo htmlspecialchars($row['numar_inmatriculare']); ?></span></td>
+                                <td><?php echo htmlspecialchars($row['vin']); ?></td>
+                                <td><?php echo htmlspecialchars($row['an_fabricatie']); ?></td>
+                                
+                                <td>
+                                    <span class="km-display">
+                                        <?php echo number_format($row['km_actuali']); ?> km
+                                    </span>
+                                </td>
+                                
+                                <td>
+                                    <span class="badge-tire <?php echo htmlspecialchars($row['sezon_anvelope']); ?>">
+                                        <?php 
+                                            if($row['sezon_anvelope'] == 'vara') echo 'Vară';
+                                            elseif($row['sezon_anvelope'] == 'iarna') echo 'Iarnă';
+                                            else echo 'All Season';
+                                        ?>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="badge <?php echo ($row['status'] == 'activa') ? 'activa' : 'inactiva'; ?>">
+                                        <?php echo htmlspecialchars($row['status']); ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="edit_car.php?id=<?php echo $row['id_masina']; ?>" class="action-link edit">Editează</a>
+                                </td>
+                            </tr>
+                    <?php
                         }
-                        ?>
-                    </tbody>
+                    } else {
+                        echo "<tr><td colspan='8' style='text-align:center;'>Nu există mașini înregistrate în sistem.</td></tr>";
+                    }
+                    ?>
+                </tbody>
             </table>
         </section>
 
@@ -120,6 +138,21 @@ if (!isset($_SESSION['username'])) {
                         <label>An Fabricație</label>
                         <input type="number" name="an_fabricatie" placeholder="Ex: 2020" required>
                     </div>
+                    
+                    <div class="form-group">
+                        <label>Kilometri Actuali</label>
+                        <input type="number" name="km_actuali" placeholder="Ex: 45000" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Sezon Anvelope</label>
+                        <select name="sezon_anvelope">
+                            <option value="vara">Vară</option>
+                            <option value="iarna">Iarnă</option>
+                            <option value="allseason">All Season</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label>Status Inițial</label>
                         <select name="status">
@@ -134,7 +167,6 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </form>
         </section>
-
     </main>
 </div>
 </body>

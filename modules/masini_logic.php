@@ -37,7 +37,7 @@ if (isset($_POST['add_car'])) {
         $errors[] = "Kilometrajul nu poate fi negativ.";
     }
 
-    if (!in_array($sezon_anvelope, ['Vara', 'Iarna', 'All-Season'])) {
+    if (!in_array($sezon_anvelope, ['vara', 'iarna', 'allseason'])) {
         $errors[] = "Sezon anvelope invalid.";
     }
 

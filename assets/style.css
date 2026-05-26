@@ -667,5 +667,29 @@ tr:last-child td {
     box-shadow: 0 6px 20px rgba(46, 213, 115, 0.4);
 }
 
+/*=============================
+    DELIMITARE TABEL MASINI
+    ==============================*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Păstrăm layout-ul fix, dar controlăm textul */
+}
+
+td {
+    word-wrap: break-word;       /* Forțează textul lung (ca VIN-ul) să se rupă și să treacă jos */
+    overflow-wrap: break-word;   /* Suport suplimentar pentru browsere moderne */
+    white-space: normal;         /* Permite textului să se întindă pe mai multe linii */
+    vertical-align: middle;      /* Aliniază toate elementele din rând la mijloc pe verticală */
+}
+
+th:nth-child(1), td:nth-child(1) { width: 18%; } /* Marcă & Model */
+th:nth-child(2), td:nth-child(2) { width: 15%; } /* Nr. Înmatriculare */
+th:nth-child(3), td:nth-child(3) { width: 22%; } /* VIN / Șasiu */
+th:nth-child(4), td:nth-child(4) { width: 12%; } /* An Fabricație */
+th:nth-child(5), td:nth-child(5) { width: 13%; } /* Km Actuali */
+th:nth-child(6), td:nth-child(6) { width: 12%; } /* Anvelope */
+th:nth-child(7), td:nth-child(7) { width: 10%; } /* Status */
+th:nth-child(8), td:nth-child(8) { width: 10%; } /* Acțiuni */
 
 
