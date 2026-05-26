@@ -297,6 +297,218 @@ header p { color: #555; margin-bottom: 30px; font-size: 0.9rem; }
     align-items: center;
 }
 
+/* ==========================================================================
+   VARIANTA FINALĂ: SPORTS-TECH GLOW (ROȘU EXTRA PREMIUM)
+   ========================================================================== */
+
+/* REPROIECTARE FUNDAL FLUID CU IMAGINEA TA */
+.container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    
+    /* Încărcăm imaginea ta */
+    background-image: url('fundal-neon.jpg'); 
+    
+    background-size: cover; /* Forțează poza să acopere tot ecranul fără să se distorsioneze */
+    background-position: center; /* O centrează perfect pe ecran */
+    background-attachment: fixed; /* O fixează pe fundal (panourile vor pluti peste ea când dai scroll) */
+    background-repeat: no-repeat; /* Nu lasă poza să se repete dacă ecranul e prea mare */
+    
+    color: #e6e8ea;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 1. SIDEBAR CU EFECT DE STICLĂ ȘI MARGINI ROTUNJITE */
+.sidebar {
+    width: 270px;
+    background: rgba(13, 15, 18, 0.65); /* Copiem transparența din smartums */
+    backdrop-filter: blur(20px); /* Efect puternic de sticlă mată */
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 35px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Numele proiectului capătă un design mai curat */
+.sidebar h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 45px;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding-left: 12px;
+    border-left: 4px solid #d63031;
+    text-shadow: 0 0 15px rgba(214, 48, 49, 0.4);
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 8px; /* Spațiere optimă între butoane */
+}
+
+/* BUTOANELE DIN STÂNGA: Copiem forma rotunjită și layout-ul aerisit */
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    color: #838b99; /* Culoarea textului inactiv din imagine */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 12px; /* Margini puternic rotunjite pentru elemente, exact ca în poză */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover fin pe buton */
+.sidebar nav ul li a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ELEMENTUL ACTIV (Schimbat de pe mov pe roșu aprins cu glow subtil) */
+.sidebar nav ul li a.active {
+    color: #ffffff;
+    background: rgba(214, 48, 49, 0.15); /* Fundal sticlos roșiatic */
+    border: 1px solid rgba(214, 48, 49, 0.25); /* Contur roșu fin în jurul butonului */
+    box-shadow: 0 4px 20px rgba(214, 48, 49, 0.15);
+}
+
+/* 2. CONȚINUTUL DIN DREAPTA (Forțat transparent pentru a dezvălui fundalul) */
+.content {
+    flex: 1;
+    padding: 45px 50px;
+    overflow-y: auto;
+    background: transparent !important; /* Elimină fundalurile blocate dedesubt */
+}
+
+.content header {
+    margin-bottom: 35px;
+}
+
+.content header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.content header p {
+    color: #647185;
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+/* 3. CARDURILE CARE PLUTESC (GLASS-PANELS TRANSLUCIDE) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: rgba(15, 17, 20, 0.60) !important; /* Transparență optimizată pentru imaginea ta */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 25px 30px;
+    border-radius: 16px; /* Colțuri rotunjite premium */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(214, 48, 49, 0.25);
+    box-shadow: 0 15px 35px rgba(214, 48, 49, 0.1);
+}
+
+.card h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #5c697e;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.card .number {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Mapare culori numere tech */
+.card.green .number { color: #10b981; }
+.card.red .number { color: #ff3838; }
+
+/* 4. SECTIUNEA TABELULUI ACTIV (GLASS-PANEL) */
+.recent-activity {
+    background: rgba(15, 17, 20, 0.60) !important; /* Stil uniform de sticlă fumurie */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.recent-activity h2 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+}
+
+th {
+    color: #4a5568;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+td {
+    color: #b2bdcd;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.01);
+}
+
+tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+    color: #ffffff;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+
+
+
+
+
+
 
 
 

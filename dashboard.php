@@ -28,7 +28,7 @@ $alerte = 0;
 <body>
 <div class="container">
     <aside class="sidebar">
-        <h2>Parc Auto</h2>
+        <h2>AUTO221</h2>
         <nav>
             <ul>
                 <li><a href="index.php" class="active">Dashboard</a></li>
