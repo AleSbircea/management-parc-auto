@@ -1,0 +1,30 @@
+# Fișiere de configurare sensibile
+.env
+.env.local
+.env.*.local
+
+# Fișiere de sistem
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# PHP
+vendor/
+composer.lock
+
+# Node
+node_modules/
+npm-debug.log
+
+# Alte fișiere temporare
+tmp/
+temp/
+cache/
+*.bak
