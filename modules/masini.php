@@ -2,7 +2,7 @@
 session_start();
 include '../config/db.php';
 if (!isset($_SESSION['username'])) {
-    header("Location: ../login.php"); /* Am corectat calea către login */
+    header("Location: ../login.php"); 
     exit();
 }
 ?>
@@ -64,6 +64,7 @@ if (!isset($_SESSION['username'])) {
                         <th>Acțiuni</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <?php
                     $query = "SELECT * FROM masini ORDER BY id_masina DESC";
@@ -87,9 +88,9 @@ if (!isset($_SESSION['username'])) {
                                 <td>
                                     <span class="badge-tire <?php echo htmlspecialchars($row['sezon_anvelope']); ?>">
                                         <?php 
-                                            if($row['sezon_anvelope'] == 'vara') echo 'Vară';
-                                            elseif($row['sezon_anvelope'] == 'iarna') echo 'Iarnă';
-                                            else echo 'All Season';
+                                            if($row['sezon_anvelope'] == 'Vara') echo 'Vară';
+                                            elseif($row['sezon_anvelope'] == 'Iarna') echo 'Iarnă';
+                                            else echo 'All-Season';
                                         ?>
                                     </span>
                                 </td>
@@ -100,7 +101,7 @@ if (!isset($_SESSION['username'])) {
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="edit_car.php?id=<?php echo $row['id_masina']; ?>" class="action-link edit">Editează</a>
+                                    <a href="edit_masini.php?id=<?php echo $row['id_masina']; ?>" class="action-link edit">Editează</a>
                                 </td>
                             </tr>
                     <?php
@@ -109,6 +110,7 @@ if (!isset($_SESSION['username'])) {
                         echo "<tr><td colspan='8' style='text-align:center;'>Nu există mașini înregistrate în sistem.</td></tr>";
                     }
                     ?>
+
                 </tbody>
             </table>
         </section>
@@ -147,9 +149,9 @@ if (!isset($_SESSION['username'])) {
                     <div class="form-group">
                         <label>Sezon Anvelope</label>
                         <select name="sezon_anvelope">
-                            <option value="vara">Vară</option>
-                            <option value="iarna">Iarnă</option>
-                            <option value="allseason">All Season</option>
+                            <option value="Vara">Vară</option>
+                            <option value="Iarna">Iarnă</option>
+                            <option value="All-Season">All-Season</option>
                         </select>
                     </div>
 
@@ -157,7 +159,8 @@ if (!isset($_SESSION['username'])) {
                         <label>Status Inițial</label>
                         <select name="status">
                             <option value="activa">Activă (Disponibilă)</option>
-                            <option value="inactiva">Inactivă (În Service / Daună)</option>
+                            <option value="service">În Service</option>
+                            <option value="indisponibila">Indisponibilă</option>    
                         </select>
                     </div>
                 </div>
