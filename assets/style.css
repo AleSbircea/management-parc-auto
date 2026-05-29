@@ -178,7 +178,7 @@ body.home-page {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-
+/* RESET ȘI FUNDAL GENERAL */
 * {
     margin: 0;
     padding: 0;
@@ -198,7 +198,7 @@ body {
     width: 100%;
 }
 
-
+/* SIDEBAR - Negru mat, minimalist */
 .sidebar {
     width: 260px;
     background-color: #000000;
@@ -214,14 +214,14 @@ body {
     margin-bottom: 40px;
 }
 
-.sidebar h2 span { color: #d63031; } 
+.sidebar h2 span { color: #d63031; } /* Partea roșie din logo */
 
 .sidebar nav ul { list-style: none; }
 
 .sidebar nav ul li { margin-bottom: 20px; }
 
 .sidebar nav ul li a {
-    color: #888; 
+    color: #888; /* Text gri pentru butoane inactive */
     text-decoration: none;
     font-size: 0.95rem;
     display: flex;
@@ -233,6 +233,7 @@ body {
     color: #ffffff;
 }
 
+/* CONȚINUT PRINCIPAL */
 .content {
     flex: 1;
     padding: 40px;
@@ -242,7 +243,7 @@ body {
 header h1 { font-size: 1.8rem; margin-bottom: 5px; }
 header p { color: #555; margin-bottom: 30px; font-size: 0.9rem; }
 
-
+/* CARDURI STATISTICI - Fundal transparent cu border fin */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -258,7 +259,7 @@ header p { color: #555; margin-bottom: 30px; font-size: 0.9rem; }
     position: relative;
 }
 
-
+/* Accentul roșu pe primul card, ca în poză */
 .card.featured {
     border: 1px solid #d63031;
 }
@@ -277,7 +278,7 @@ header p { color: #555; margin-bottom: 30px; font-size: 0.9rem; }
     display: block;
 }
 
-
+/* SECȚIUNEA ALERTE */
 .alerts-box {
     background-color: #161616;
     border: 1px solid #222;
@@ -286,7 +287,7 @@ header p { color: #555; margin-bottom: 30px; font-size: 0.9rem; }
 }
 
 .alert-item {
-    background-color: rgba(214, 48, 49, 0.05); 
+    background-color: rgba(214, 48, 49, 0.05); /* Roșu foarte discret */
     border: 1px solid rgba(214, 48, 49, 0.2);
     padding: 15px;
     border-radius: 8px;
@@ -296,5 +297,374 @@ header p { color: #555; margin-bottom: 30px; font-size: 0.9rem; }
     align-items: center;
 }
 
+/* ==========================================================================
+   VARIANTA FINALĂ: SPORTS-TECH GLOW (ROȘU EXTRA PREMIUM)
+   ========================================================================== */
+
+/* REPROIECTARE FUNDAL FLUID CU IMAGINEA TA */
+.container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    
+    /* Încărcăm imaginea ta */
+    background-image: url('fundal-neon.jpg'); 
+    
+    background-size: cover; /* Forțează poza să acopere tot ecranul fără să se distorsioneze */
+    background-position: center; /* O centrează perfect pe ecran */
+    background-attachment: fixed; /* O fixează pe fundal (panourile vor pluti peste ea când dai scroll) */
+    background-repeat: no-repeat; /* Nu lasă poza să se repete dacă ecranul e prea mare */
+    
+    color: #e6e8ea;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 1. SIDEBAR CU EFECT DE STICLĂ ȘI MARGINI ROTUNJITE */
+.sidebar {
+    width: 270px;
+    background: rgba(13, 15, 18, 0.65); /* Copiem transparența din smartums */
+    backdrop-filter: blur(20px); /* Efect puternic de sticlă mată */
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 35px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Numele proiectului capătă un design mai curat */
+.sidebar h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 45px;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding-left: 12px;
+    border-left: 4px solid #d63031;
+    text-shadow: 0 0 15px rgba(214, 48, 49, 0.4);
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 8px; /* Spațiere optimă între butoane */
+}
+
+/* BUTOANELE DIN STÂNGA: Copiem forma rotunjită și layout-ul aerisit */
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    color: #838b99; /* Culoarea textului inactiv din imagine */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 12px; /* Margini puternic rotunjite pentru elemente, exact ca în poză */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover fin pe buton */
+.sidebar nav ul li a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ELEMENTUL ACTIV (Schimbat de pe mov pe roșu aprins cu glow subtil) */
+.sidebar nav ul li a.active {
+    color: #ffffff;
+    background: rgba(214, 48, 49, 0.15); /* Fundal sticlos roșiatic */
+    border: 1px solid rgba(214, 48, 49, 0.25); /* Contur roșu fin în jurul butonului */
+    box-shadow: 0 4px 20px rgba(214, 48, 49, 0.15);
+}
+
+/* 2. CONȚINUTUL DIN DREAPTA (Forțat transparent pentru a dezvălui fundalul) */
+.content {
+    flex: 1;
+    padding: 45px 50px;
+    overflow-y: auto;
+    background: transparent !important; /* Elimină fundalurile blocate dedesubt */
+}
+
+.content header {
+    margin-bottom: 35px;
+}
+
+.content header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.content header p {
+    color: #647185;
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+/* 3. CARDURILE CARE PLUTESC (GLASS-PANELS TRANSLUCIDE) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: rgba(15, 17, 20, 0.60) !important; /* Transparență optimizată pentru imaginea ta */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 25px 30px;
+    border-radius: 16px; /* Colțuri rotunjite premium */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(214, 48, 49, 0.25);
+    box-shadow: 0 15px 35px rgba(214, 48, 49, 0.1);
+}
+
+.card h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #5c697e;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.card .number {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Mapare culori numere tech */
+.card.green .number { color: #10b981; }
+.card.red .number { color: #ff3838; }
+
+/* 4. SECTIUNEA TABELULUI ACTIV (GLASS-PANEL) */
+.recent-activity {
+    background: rgba(15, 17, 20, 0.60) !important; /* Stil uniform de sticlă fumurie */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.recent-activity h2 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+}
+
+th {
+    color: #4a5568;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+td {
+    color: #b2bdcd;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.01);
+}
+
+tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+    color: #ffffff;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   STILIZARE COLOANĂ FLOTĂ AUTO & FORMULARE
+   ========================================================================== */
+
+/* Header special cu buton pe aceeași linie */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 20px;
+}
+
+/* Butonul "+ Adaugă Mașină" */
+.btn-add {
+    background: linear-gradient(135deg, #d63031 0%, #b32425 100%);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(214, 48, 49, 0.5);
+}
+
+/* Zona de filtrare / căutare de deasupra tabelului */
+.table-header-tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: #fff;
+    width: 280px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.search-box:focus {
+    border-color: rgba(214, 48, 49, 0.5);
+}
+
+/* Stil special pentru Numărul de Înmatriculare (Stil plăcuță auto în miniatură) */
+.plate-number {
+    background: #fff;
+    color: #111;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-left: 3px solid #0055a5; /* Dungă albastră stil UE */
+    font-family: monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* Link-uri de acțiuni (Editează/Șterge) */
+.action-link.edit {
+    color: #6c727a;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.action-link.edit:hover {
+    color: #ff3838;
+}
+
+/* STILIZARE FORMULAR GLASSMORPHISM */
+.car-form {
+    margin-top: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #5c697e;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Input-urile și Select-urile din sticlă mată întunecată */
+.form-group input, 
+.form-group select {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: rgba(214, 48, 49, 0.4);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 10px rgba(214, 48, 49, 0.1);
+}
+
+/* Stil pentru meniul de selecție (Dropdown) */
+.form-group select option {
+    background: #0f1115; /* Fundal închis pentru opțiuni ca să se vadă textul */
+    color: #fff;
+}
+
+/* Zona butonului de trimitere */
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #2ed573 0%, #26af5f 100%);
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(46, 213, 115, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 213, 115, 0.4);
+}
 
 
