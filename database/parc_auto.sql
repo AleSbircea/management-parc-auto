@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2026 at 08:05 AM
+-- Generation Time: May 30, 2026 at 09:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `parc_auto`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `amenzi`
+--
+
+CREATE TABLE `amenzi` (
+  `id` int(11) NOT NULL,
+  `masina_id` int(11) NOT NULL,
+  `sofer_id` int(11) DEFAULT NULL,
+  `data_amenzi` date NOT NULL,
+  `motiv` varchar(200) NOT NULL,
+  `valoare` decimal(8,2) NOT NULL,
+  `plata_status` enum('neplatita','platita','in_contestare') NOT NULL DEFAULT 'neplatita',
+  `data_plata` date DEFAULT NULL,
+  `dosar_nr` varchar(50) DEFAULT NULL,
+  `tip_penalizare` enum('doar_amenda','puncte_retinute','carnet_retras','suspendare_temporara','altele') NOT NULL DEFAULT 'doar_amenda',
+  `observatii` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_romanian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anvelope`
+--
+
+CREATE TABLE `anvelope` (
+  `id` int(11) NOT NULL,
+  `masina_id` int(11) NOT NULL,
+  `sezon` enum('Vara','Iarna','All-Season') NOT NULL,
+  `stare` enum('bun','uzat','deteriorat') NOT NULL DEFAULT 'bun',
+  `km_pus` int(11) NOT NULL,
+  `km_estimat_schimb` int(11) DEFAULT NULL,
+  `data_punere` date NOT NULL,
+  `cost` decimal(8,2) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_romanian_ci;
 
 -- --------------------------------------------------------
 
@@ -91,6 +130,48 @@ CREATE TABLE `asigurari` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `combustibil`
+--
+
+CREATE TABLE `combustibil` (
+  `id` int(11) NOT NULL,
+  `masina_id` int(11) NOT NULL,
+  `sofer_id` int(11) DEFAULT NULL,
+  `data_alimentare` date NOT NULL,
+  `tip` enum('benzina','motorina','gpl','electrica') NOT NULL,
+  `cantitate` decimal(8,2) NOT NULL,
+  `unitate` enum('litri','kWh') NOT NULL,
+  `pret_unitate` decimal(6,2) NOT NULL,
+  `cost_total` decimal(8,2) NOT NULL,
+  `km_la_alimentare` int(11) NOT NULL,
+  `locatie` varchar(100) DEFAULT NULL,
+  `observatii` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_romanian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foaie_parcurs`
+--
+
+CREATE TABLE `foaie_parcurs` (
+  `id` int(11) NOT NULL,
+  `sofer_id` int(11) NOT NULL,
+  `masina_id` int(11) NOT NULL,
+  `data_start` date NOT NULL,
+  `data_sfarsit` date DEFAULT NULL,
+  `km_start` int(11) NOT NULL,
+  `km_sfarsit` int(11) DEFAULT NULL,
+  `motiv` varchar(200) DEFAULT NULL,
+  `obligatorie` enum('da','nu') NOT NULL DEFAULT 'da',
+  `observatii` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_romanian_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `itp`
 --
 
@@ -130,6 +211,24 @@ CREATE TABLE `masini` (
 
 INSERT INTO `masini` (`id_masina`, `marca`, `model`, `numar_inmatriculare`, `vin`, `an_fabricatie`, `sezon_anvelope`, `km_actuali`, `status`) VALUES
 (2, 'OPEL', 'ASTRA H', 'SB 06 SEA', 'WP0ZZZ99ZLS123456', 2013, 'Iarna', 185000, 'activa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `revizii`
+--
+
+CREATE TABLE `revizii` (
+  `id` int(11) NOT NULL,
+  `masina_id` int(11) NOT NULL,
+  `data_revizie` date NOT NULL,
+  `km_la_revizie` int(11) NOT NULL,
+  `tip` enum('schimb_ulei','schimb_filtru_aer','schimb_filtru_ulei','revizie_complet_15000km','revizie_complet_30000km','revizie_complet_60000km','verificare_frane','verificare_lichid_racire','verificare_suspensie','verificare_anvelope','service_speciala') NOT NULL,
+  `cost` decimal(8,2) DEFAULT NULL,
+  `atelier` varchar(100) DEFAULT NULL,
+  `observatii` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_romanian_ci;
 
 -- --------------------------------------------------------
 
@@ -218,6 +317,22 @@ CREATE TABLE `viniete` (
 --
 
 --
+-- Indexes for table `amenzi`
+--
+ALTER TABLE `amenzi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_amenzi_masina` (`masina_id`),
+  ADD KEY `idx_amenzi_sofer` (`sofer_id`),
+  ADD KEY `idx_amenzi_status` (`plata_status`);
+
+--
+-- Indexes for table `anvelope`
+--
+ALTER TABLE `anvelope`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `masina_id` (`masina_id`);
+
+--
 -- Indexes for table `asignari_soferi`
 --
 ALTER TABLE `asignari_soferi`
@@ -235,6 +350,22 @@ ALTER TABLE `asigurari`
   ADD KEY `service_id` (`service_id`);
 
 --
+-- Indexes for table `combustibil`
+--
+ALTER TABLE `combustibil`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `masina_id` (`masina_id`),
+  ADD KEY `sofer_id` (`sofer_id`);
+
+--
+-- Indexes for table `foaie_parcurs`
+--
+ALTER TABLE `foaie_parcurs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sofer_id` (`sofer_id`),
+  ADD KEY `masina_id` (`masina_id`);
+
+--
 -- Indexes for table `itp`
 --
 ALTER TABLE `itp`
@@ -248,6 +379,13 @@ ALTER TABLE `masini`
   ADD PRIMARY KEY (`id_masina`),
   ADD UNIQUE KEY `numar_inmatriculare` (`numar_inmatriculare`),
   ADD UNIQUE KEY `vin` (`vin`);
+
+--
+-- Indexes for table `revizii`
+--
+ALTER TABLE `revizii`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `masina_id` (`masina_id`);
 
 --
 -- Indexes for table `service`
@@ -284,6 +422,18 @@ ALTER TABLE `viniete`
 --
 
 --
+-- AUTO_INCREMENT for table `amenzi`
+--
+ALTER TABLE `amenzi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `anvelope`
+--
+ALTER TABLE `anvelope`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `asignari_soferi`
 --
 ALTER TABLE `asignari_soferi`
@@ -293,6 +443,18 @@ ALTER TABLE `asignari_soferi`
 -- AUTO_INCREMENT for table `asigurari`
 --
 ALTER TABLE `asigurari`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `combustibil`
+--
+ALTER TABLE `combustibil`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `foaie_parcurs`
+--
+ALTER TABLE `foaie_parcurs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -306,6 +468,12 @@ ALTER TABLE `itp`
 --
 ALTER TABLE `masini`
   MODIFY `id_masina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `revizii`
+--
+ALTER TABLE `revizii`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `service`
@@ -336,6 +504,19 @@ ALTER TABLE `viniete`
 --
 
 --
+-- Constraints for table `amenzi`
+--
+ALTER TABLE `amenzi`
+  ADD CONSTRAINT `amenzi_ibfk_1` FOREIGN KEY (`masina_id`) REFERENCES `masini` (`id_masina`),
+  ADD CONSTRAINT `amenzi_ibfk_2` FOREIGN KEY (`sofer_id`) REFERENCES `soferi` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `anvelope`
+--
+ALTER TABLE `anvelope`
+  ADD CONSTRAINT `anvelope_ibfk_1` FOREIGN KEY (`masina_id`) REFERENCES `masini` (`id_masina`);
+
+--
 -- Constraints for table `asignari_soferi`
 --
 ALTER TABLE `asignari_soferi`
@@ -350,10 +531,30 @@ ALTER TABLE `asigurari`
   ADD CONSTRAINT `asigurari_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`);
 
 --
+-- Constraints for table `combustibil`
+--
+ALTER TABLE `combustibil`
+  ADD CONSTRAINT `combustibil_ibfk_1` FOREIGN KEY (`masina_id`) REFERENCES `masini` (`id_masina`),
+  ADD CONSTRAINT `combustibil_ibfk_2` FOREIGN KEY (`sofer_id`) REFERENCES `soferi` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `foaie_parcurs`
+--
+ALTER TABLE `foaie_parcurs`
+  ADD CONSTRAINT `foaie_parcurs_ibfk_1` FOREIGN KEY (`sofer_id`) REFERENCES `soferi` (`id`),
+  ADD CONSTRAINT `foaie_parcurs_ibfk_2` FOREIGN KEY (`masina_id`) REFERENCES `masini` (`id_masina`);
+
+--
 -- Constraints for table `itp`
 --
 ALTER TABLE `itp`
   ADD CONSTRAINT `itp_ibfk_1` FOREIGN KEY (`masina_id`) REFERENCES `masini` (`id_masina`);
+
+--
+-- Constraints for table `revizii`
+--
+ALTER TABLE `revizii`
+  ADD CONSTRAINT `revizii_ibfk_1` FOREIGN KEY (`masina_id`) REFERENCES `masini` (`id_masina`);
 
 --
 -- Constraints for table `service`
